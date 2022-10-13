@@ -1,6 +1,9 @@
 #### Some useful stuff for functions
 
 ##### NamedFunction
+```python
+pip install useful-functions-easier-life
+```
 
 ```python
     namedfunctiontest = NamedFunction(
