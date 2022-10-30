@@ -189,7 +189,7 @@ def execute_several_functions_insideout(*decs):
     return deco
 
 
-def execute_several_functions_one_after_another(all_functions: list):
+def execute_several_functions_one_after_another(all_functions: list, arguments=True):
     """
     allfunctions=lambda x: (x, isinstance(x,str)),lambda x: str(x) + '-1000', lambda x:x*5, lambda x: isinstance(x,str)
     ca=execute_several_functions_one_after_another(allfunctions)
@@ -198,7 +198,15 @@ def execute_several_functions_one_after_another(all_functions: list):
     ca(101)
     Out[4]: [(101, False), '101-1000', 505, False]
     """
-    return partial(join_functions, all_functions=all_functions)
+    if arguments:
+        return partial(join_functions, all_functions=all_functions)
+    else:
+        return partial(join_functions_noargs, all_functions=all_functions)
+
+
+def join_functions_noargs(all_functions):
+    lala = lambda: [xx() for xx in all_functions]
+    return lala()
 
 
 def join_functions(va, all_functions):
