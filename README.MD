@@ -89,17 +89,18 @@ pip install useful-functions-easier-life
 ##### ignore_exceptions
 
 ```python
-    testex = [ignore_exceptions(divmod, 50, choice([0, 1])) for x in range(10)]
+    testex = [ignore_exceptions(divmod, 50, choice([0, 1]),exception_value=(0,0)) for x in range(10)]
 
-    Out[11]:
+    testex
+    Out[7]:
     [(50, 0),
+     (0, 0),
+     (0, 0),
+     (0, 0),
      (50, 0),
      (50, 0),
-     None,
      (50, 0),
      (50, 0),
-     None,
-     None,
      (50, 0),
-     (50, 0)]
+     (0, 0)]
 ```
