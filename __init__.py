@@ -125,7 +125,7 @@ def ignore_exceptions(func, *args, **kwargs):
 
 
 def ignore_exceptions_decorator(
-    f_py=None, print_exception=True, exception_value=None, disable=False
+    f_py=None, print_exception=True, exception_value=None, disable=True
 ):
     """
     from random import choice
@@ -152,6 +152,7 @@ def ignore_exceptions_decorator(
     #Blueprint for other useful stuff
     """
     assert callable(f_py) or f_py is None
+    print(print_exception,exception_value,disable)
 
     def _decorator(func):
         @wraps(func)
@@ -159,12 +160,19 @@ def ignore_exceptions_decorator(
             if disable is False:
                 try:
                     return func(*args, **kwargs)
-                except Exception as fe:
+                except Exception as fexa:
                     if print_exception:
-                        print(fe)
+                        print(fexa)
                     return exception_value
             else:
-                return func(*args, **kwargs)
+                try:
+                    return func(*args, **kwargs)
+                except Exception as feba:
+                    if print_exception:
+                        print(feba)
+                    if disable:
+                        raise feba
+                    return exception_value
 
         return wrapper
 
