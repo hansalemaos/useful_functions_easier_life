@@ -152,7 +152,6 @@ def ignore_exceptions_decorator(
     #Blueprint for other useful stuff
     """
     assert callable(f_py) or f_py is None
-    print(print_exception,exception_value,disable)
 
     def _decorator(func):
         @wraps(func)
